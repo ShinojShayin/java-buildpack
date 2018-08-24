@@ -21,12 +21,7 @@
        
 <Connector port="8443"
 protocol="org.apache.coyote.http11.Http11AprProtocol"
-maxThreads="150" SSLEnabled="true">
-<UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol"/>
-<SSLHostConfig honorCipherOrder="false">
-<Certificate certificateKeyFile="conf/ca.key"
-certificateFile="conf/ca.crt"/>
-</SSLHostConfig>
+maxThreads="150">
 </Connector>
 
         <Engine defaultHost='localhost' name='Catalina'>
