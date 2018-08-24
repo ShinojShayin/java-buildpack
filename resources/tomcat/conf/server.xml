@@ -18,7 +18,7 @@
 <Server port='-1'>
 
     <Service name='Catalina'>
-       <Connector port='${http.port}' bindOnInit='false' connectionTimeout='20000' SSLEnabled="true" protocol="org.apache.coyote.http11.Http11AprProtocol" >
+       <Connector port='443' bindOnInit='false' connectionTimeout='20000' SSLEnabled="true" protocol="org.apache.coyote.http11.Http11AprProtocol" >
         <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol"/>
          
          
