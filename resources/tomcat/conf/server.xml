@@ -18,14 +18,18 @@
 <Server port='-1'>
 
     <Service name='Catalina'>
-       
-<Connector port="${http:port}"  ></Connector>
-
+        <Connector port='${http.port}' bindOnInit='false' connectionTimeout='20000' redirectPort="443"/>
+        <Listener SSLEngine="on" className="org.apache.catalina.core.AprLifecycleListener"/> 
+      
+        <Connector SSLEnabled="true" port="443" protocol="org.apache.coyote.http11.Http11AprProtocol">
+		      <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol"/>
+		      <SSLHostConfig honorCipherOrder="false">
+		        <Certificate certificateFile="${catalina.base}/conf/ca.crt" certificateKeyFile="${catalina.base}/conf/ca.key"/>
+		      </SSLHostConfig>
+	      </Connector>
+      
         <Engine defaultHost='localhost' name='Catalina'>
-            <Valve className="org.apache.catalina.valves.RemoteIpValve"
-    remoteIpHeader="x-forwarded-for"
-    protocolHeader="x-forwarded-proto"
-    protocolHeaderHttpsValue="https" />
+            <Valve className='org.apache.catalina.valves.RemoteIpValve' protocolHeader='x-forwarded-proto'/>
             <Valve className='org.cloudfoundry.tomcat.logging.access.CloudFoundryAccessLoggingValve'
                    pattern='[ACCESS] %{org.apache.catalina.AccessLog.RemoteAddr}r %l %t %D %F %B %S vcap_request_id:%{X-Vcap-Request-Id}i'
                    enabled='${access.logging.enabled}'/>
