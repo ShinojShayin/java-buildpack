@@ -18,10 +18,10 @@
 <Server port='-1'>
 
     <Service name='Catalina'>
-        <Connector port='${http.port}' bindOnInit='false' connectionTimeout='20000' redirectPort="443"/>
+       
         <Listener SSLEngine="on" className="org.apache.catalina.core.AprLifecycleListener"/> 
       
-        <Connector SSLEnabled="true" port="443" protocol="org.apache.coyote.http11.Http11AprProtocol">
+        <Connector port='${http.port}' bindOnInit='false' connectionTimeout='20000' SSLEnabled="true" protocol="org.apache.coyote.http11.Http11AprProtocol">
 		      <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol"/>
 		      <SSLHostConfig honorCipherOrder="false">
 		        <Certificate certificateFile="${catalina.base}/conf/ca.crt" certificateKeyFile="${catalina.base}/conf/ca.key"/>
